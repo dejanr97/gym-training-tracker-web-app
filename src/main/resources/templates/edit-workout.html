@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Edit Workout</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <link rel="stylesheet" th:href="@{css/styles.css}" />
+    </head>
+    <body>
+        <div th:replace="~{fragments/navbar :: navbar}"></div>
+        <div class="container mt-5">
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="card-title" style="text-align: center;">Edit Workout</h1>
+                    <form th:action="@{'/update/' + ${workout.id}}" method="POST">
+                        <input type="hidden" name="_method" value="PUT">
+                        <div class="form-group">
+                            <label for="date" style="font-weight: bold; color: rgb(0, 0, 0); font-family: 'Fjalla One', sans-serif;">DATE</label>
+                            <input type="date" id="date" name="date" th:value="${workout.date}" class="form-control">
+                        </div>
+                        <div class="form-group" style="margin-bottom: 10px;">
+                            <label for="date" style="font-weight: bold; color: rgb(0, 0, 0); font-family: 'Fjalla One', sans-serif;">Muscle group:</label>
+                            <select id="exerciseType" name="exerciseType" class="form-control">
+                                <option value="chest">Chest</option>
+                                <option value="back">Back</option>
+                                <option value="shoulders">Shoulders</option>
+                                <option value="arms">Arms</option>
+                                <option value="legs">Legs</option>
+                                <option value="abs">Abs</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="exerciseName" style="font-weight: bold; color: rgb(0, 0, 0); font-family: 'Fjalla One', sans-serif;">EXERCISE NAME</label>
+                            <input type="text" id="exerciseName" name="exerciseName" th:value="${workout.exerciseName}" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="sets" style="font-weight: bold; color: rgb(0, 0, 0); font-family: 'Fjalla One', sans-serif;">NUMBER OF SETS</label>
+                            <input type="number" id="sets" name="sets" th:value="${workout.sets}" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="reps" style="font-weight: bold; color: rgb(0, 0, 0); font-family: 'Fjalla One', sans-serif;">NUMBER OF REPS</label>
+                            <input type="number" id="reps" name="reps" th:value="${workout.reps}" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="weight" style="font-weight: bold; color: rgb(0, 0, 0); font-family: 'Fjalla One', sans-serif;">WEIGHT (kg)</label>
+                            <input type="number" id="weight" name="weight" th:value="${workout.weight}" class="form-control">
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-success" style="margin-top: 20px; width: 10%;">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

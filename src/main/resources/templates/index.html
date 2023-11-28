@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Home</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <link rel="stylesheet" th:href="@{css/styles.css}" />
+    </head>
+    <body>
+        <div th:replace="~{fragments/navbar :: navbar}"></div>
+        <div class="container">
+            <div class="content-container">
+                <div class="content">
+                    <h1 th:text="'Welcome ' + ${name} + '&#128075'"></h1>
+                    <a th:href="@{/addworkouts}" class="btn btn-primary btn-lg start-button"> Start tracking your workouts </a>
+                </div>
+            </div>
+        </div>
+        <div th:replace="~{fragments/footer :: footer}"></div>
+    </body>
+</html>

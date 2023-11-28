@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Exercise List</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    </head>
+    <body>
+        <div th:replace="~{fragments/navbar :: navbar}"></div>
+        <div class="container">
+            <h1>Exercise List</h1>
+            <form action="/addexercise" method="post">
+                <div class="form-group">
+                    <label for="name">Exercise Name:</label>
+                    <input type="text" id="name" name="newExerciseName" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Add Exercise</button>
+            </form>
+            <table class="table table-bordered table-striped  table-dark table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Exercise Name</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="exercise : ${exercises}">
+                        <td th:text="${exercise.id}"></td>
+                        <td th:text="${exercise.newExerciseName}"></td>
+                        <td>
+                            <form action="/exercises/delete/{exercise.id}" method="POST">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button type="submit" class="btn btn-danger btn-delete">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>

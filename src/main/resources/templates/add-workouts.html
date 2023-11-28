@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Add Workouts</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <link href="https://fonts.googleapis.com/css2?family=Alumni+Sans+Collegiate+One&family=Bebas+Neue&family=Fjalla+One&display=swap" rel="stylesheet">
+        <link rel="stylesheet" th:href="@{css/styles.css}" />
+    </head>
+    <body>
+        <div th:replace="~{fragments/navbar :: navbar}"></div>
+        <div class="custom-container">
+            <h1 class="form-title" style="font-weight: bold; color: rgb(0, 0, 0); font-family: 'Fjalla One', sans-serif;">Enter your workouts</h1>
+            <!-- Form for entering workout information -->
+            <form action="/save" method="post">
+                <div class="form-group" style="margin-bottom: 10px;">
+                    <label for="date" style="font-weight: bold; color: rgb(0, 0, 0); font-family: 'Fjalla One', sans-serif;">Date:</label>
+                    <input type="date" id="date" name="date" class="form-control" required>
+                </div>
+                <div class="form-group" style="margin-bottom: 10px;">
+                    <label for="date" style="font-weight: bold; color: rgb(0, 0, 0); font-family: 'Fjalla One', sans-serif;">Muscle group:</label>
+                    <select id="exerciseType" name="exerciseType" class="form-control">
+                        <option value="chest">Chest</option>
+                        <option value="back">Back</option>
+                        <option value="shoulders">Shoulders</option>
+                        <option value="arms">Arms</option>
+                        <option value="legs">Legs</option>
+                        <option value="abs">Abs</option>
+                    </select>
+                </div>
+                <div class="form-group" style="margin-bottom: 10px;">
+                    <label for="date" style="font-weight: bold; color: rgb(0, 0, 0); font-family: 'Fjalla One', sans-serif;">Choose exercise:</label>
+                    <select id="exerciseSelect" name="selectedExercise" class="form-control">
+                        <option th:each="exercise : ${exercises}" th:value="${exercise.newExerciseName}" th:text="${exercise.newExerciseName}"></option>
+                    </select>
+                </div>
+                <div class="form-group" style="margin-bottom: 10px;">
+                    <label for="date" style="font-weight: bold; color: rgb(0, 0, 0); font-family: 'Fjalla One', sans-serif;">Number of sets:</label>
+                    <input type="number" id="sets" name="sets" class="form-control" required>
+                </div>
+                <div class="form-group" style="margin-bottom: 10px;">
+                    <label for="date" style="font-weight: bold; color: rgb(0, 0, 0); font-family: 'Fjalla One', sans-serif;">Number of reps:</label>
+                    <input type="number" id="reps" name="reps" class="form-control" required>
+                </div>
+                <div class="form-group" style="margin-bottom: 10px;">
+                    <label for "date" style="font-weight: bold; color: rgb(0, 0, 0); font-family: 'Fjalla One', sans-serif;">Weight:</label>
+                    <input type="text" id="weight" name="weight" class="form-control" step="0.1" required>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-success" style="margin-top: 20px;">Save workout</button>
+                </div>
+            </form>
+        </div>
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                var today = new Date();
+                var dd = String(today.getDate()).padStart(2, '0');
+                var mm = String(today.getMonth() + 1).padStart(2, '0');
+                var yyyy = today.getFullYear();
+                var formattedDate = yyyy + '-' + mm + '-' + dd;
+                document.getElementById("date").value = formattedDate;
+            });
+        </script>
+    </body>
+</html>
